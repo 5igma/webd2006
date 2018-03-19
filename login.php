@@ -8,9 +8,6 @@
 ?>
 
 
-<P>test body</P>
-
-
 
 
 <?php
