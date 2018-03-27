@@ -11,4 +11,9 @@
     }
 
     session_start();
+
+    $isLogin = false;
+    if(isset($_SESSION['uname'])){
+        $isLogin = true;
+    }
 ?>
