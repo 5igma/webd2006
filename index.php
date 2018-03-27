@@ -11,6 +11,8 @@
 <P>test body</P>
 
 
+<p> <?= $_SESSION["fname"] ?> </p>
+
 
 
 <?php

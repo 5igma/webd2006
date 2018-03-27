@@ -12,7 +12,7 @@
 			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 			if ($_POST['password'] == $_POST['password2']) {
-				$title		= filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				$title	= filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 				$uname = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 				$email = filter_input(INPUT_POST,'email', FILTER_VALIDATE_EMAIL);
 				$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -34,32 +34,34 @@
 
 				    $statement = $db->prepare($query);
 				    $statement->execute();
-				    echo 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
-
-					//mail
-					$to      = $email; // Send email to our user
-					$subject = 'Signup | Verification';
-					$message = '
-					 
-					Thanks for signing up!
-					Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-					 
-					------------------------
-					Username: '.$uname.'
-					------------------------
-					 
-					Please click this link to activate your account:
-					http://127.0.0.1/webd2006/project/verify.php?email='.$email.'&hash='.$hash.'
-					 
-					';
-					                     
-					$headers = 'From:noreply@minhduong.com' . "\r\n";
-					mail($to, $subject, $message, $headers); // Send our email
 
 				} else {
 					echo "Account Already exists in database.";
 				}
 			} 
+		} elseif ($_POST['command'] == 'login') {
+			if(isset($_POST["username"]) && isset($_POST['password'])) {
+				$uname = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				//$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+				$password = $_POST['password'];
+				$query = "SELECT * FROM Users WHERE uname = :uname";
+				$statement = $db->prepare($query);
+				$statement -> bindValue(":uname", $uname);
+				$statement->execute();
+				$row = $statement->fetch();
+				if (password_verify($password, $row['password'])) {
+					$_SESSION["userid"] = $row['userid'];
+					$_SESSION['uname'] = $row['uname'];
+					$_SESSION['fname'] = $row['fname'];
+					$_SESSION['email'] = $row['email'];
+					header('location:index.php?validlogin');
+				}
+				else{
+					header('location:login.php?invalidLogin');
+				die();
+				}
+				
+			}
 		}
 
 
