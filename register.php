@@ -2,9 +2,12 @@
 	include_once('config.php');
 	$pageTitle="Register";
 	include_once('header.php');
-
+	
+	if(!$_SESSION['varify']){
+		header('Location: varify.php');
+	}
 ?>
-
+<br>
 <form id="register" method="post" action="process.php" enctype="multipart/form-data">
 		<fieldset>
 			<label for="username">Username:</label>

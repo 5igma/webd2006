@@ -1,7 +1,7 @@
 <?php
 	include_once('config.php');
 
-	$pageTitle="Index";
+	$pageTitle="All Post";
 
 	include_once('header.php');
 

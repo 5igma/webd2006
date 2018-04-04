@@ -9,4 +9,7 @@
 
 
 	include_once('connect.php');
+	include_once('messages.php');
+	include_once('functions.php');
+
 ?>

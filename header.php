@@ -10,3 +10,7 @@
   	<?php
 		include_once('nav.php');
 	?>
+	<?php if (isset($msg)): ?> 
+		<?= $msg ?>
+	<?php endif; ?>
+  

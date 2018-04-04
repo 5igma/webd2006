@@ -1,4 +1,6 @@
 	</body>
+	
+	<br>
 
 	<div id="footer">
  		<?= $copyright ?>

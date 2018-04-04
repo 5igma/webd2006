@@ -3,11 +3,17 @@
 
 	$pageTitle="Index";
 
+	if(!$_SESSION['varify']){
+		header('Location: varify.php');
+	}
+
 	include_once('header.php');
 
-?>
+	
 
-<form id="register" method="post" action="process.php" enctype="multipart/form-data">
+?>
+<br>
+<form id="login" method="post" action="process.php" enctype="multipart/form-data">
 		<fieldset>
 			<label for="username">Username:</label>
 			<input id="username" name="username" type="text" placeholder="User Name" required/>

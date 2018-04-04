@@ -34,3 +34,46 @@ nav ul li a:hover, nav ul li a:focus {
 	color:#FFF;
 	background: lightgreen;
 }
+
+div#footer {
+  position: relative;
+  margin-top: -90px;
+  /* negative value of footer height */
+  height: 90px;
+  clear: both;
+  /*background-color: red;*/
+}
+
+div#footer {
+    text-align: center;
+    margin-top: 10px;
+    
+}
+div.post h2 a, div#header h1 a {
+    text-decoration: none;
+    color: black;
+}
+div.post h2 {
+    margin-bottom: 0;
+}
+
+div.post p {
+    margin-top: 0;
+}
+
+div.post div.message p {
+    margin-top: 0.5em;
+}
+
+div#posts {
+    border: 2px solid grey;
+    padding: 0 10px 10px 10px;
+}
+
+h1, h2 {
+    font-family: Cambria, times, serif;
+}
+
+div.message {
+    font-family: Calibri, sans-serif;
+}
