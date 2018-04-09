@@ -102,7 +102,7 @@
 			$message = trim($message);
 			$id = trim($id);
 			if(strlen($title) >= 1 && strlen($message) >= 1){
-				$query = "INSERT INTO posts (userid, title, message) values ('".$_SESSION['userid']."','".$title."', '".$message."')";
+				$query = "UPDATE `posts` SET `title` = '".$title."', `message` = '".$message."', `lastedit` = now() WHERE `posts`.`postid` = '".$id."';";
 				$statement = $db->prepare($query);
 				$statement->execute();
 				header('Location: index.php');

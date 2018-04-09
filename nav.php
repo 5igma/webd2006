@@ -3,6 +3,7 @@
         <li><a href="index.php">Home</a></li>
         <li><a href="post.php">Post</a></li>
         <?php if ($isLogin): ?>
+            <li><a href="search.php">Search</a></li>
             <li><a href="allpost.php">All Posts</a></li>
             <li><a href="profile.php">My Profile</a></li>
         	<li><a href="logout.php">Logout</a></li>
@@ -16,3 +17,13 @@
         <li><a href="contact.php">Contact us</a></li>
     </ul>
 </nav>
+<br>
+<fieldset>
+    <legend>Search</legend>
+    <form action="search.php" method="GET">
+        <input type="text" name="s" />
+        <input type="submit" value="Search" />
+    </form>
+</fieldset>
+<br>
+

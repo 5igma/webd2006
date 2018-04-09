@@ -17,6 +17,42 @@
 		$statement->execute();
 	}
 
+	function loadPostASC()
+	{
+		global $db;
+		global $statement;
+		$query = "SELECT * FROM posts ORDER BY title ASC;";
+		$statement = $db->prepare($query);
+		$statement->execute();
+	}
+
+	function loadPostDesc()
+	{
+		global $db;
+		global $statement;
+		$query = "SELECT * FROM posts ORDER BY title DESC;";
+		$statement = $db->prepare($query);
+		$statement->execute();
+	}
+
+	function loadPostDate()
+	{
+		global $db;
+		global $statement;
+		$query = "SELECT * FROM posts ORDER BY date DESC;";
+		$statement = $db->prepare($query);
+		$statement->execute();
+	}
+
+	function loadPostLastEdit()
+	{
+		global $db;
+		global $statement;
+		$query = "SELECT * FROM posts ORDER BY lastedit DESC;";
+		$statement = $db->prepare($query);
+		$statement->execute();
+	}
+
 	function showPost($postid)
 	{
 		global $db;
@@ -28,6 +64,32 @@
 		if($statement->rowCount() <= 0) {
 			header("Location: index.php");
 		die();
+		}
+	}
+
+	function search($string){
+
+		$min_length = 3;
+
+		if(strlen($string) >= $min_length){
+
+			$string = htmlspecialchars($string); 
+			//$string = mysql_real_escape_string($string);
+
+			global $db;
+			global $statement;
+			$query = "SELECT * FROM `posts` WHERE `title` LIKE '%".$string."%' OR `message` LIKE '%".$string."%'";
+			$statement = $db->prepare($query);
+			$statement->execute();
+
+			if($statement->rowCount() > 0){
+
+			} else {
+				echo "No results";
+			}
+
+		} else {
+			echo "Minimum length is ".$min_length;
 		}
 	}
 
