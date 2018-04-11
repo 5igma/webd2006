@@ -23,6 +23,7 @@
 		}	
 	}
 
+	getCategories($id);
 
 ?>
 
@@ -30,7 +31,7 @@
     <div id="posts">
       <form action="process.php" method="post">
         <fieldset>
-          <legend>Edit Blog Post</legend>
+          <legend>Edit Post</legend>
           <p>
             <label for="title">Title</label>
             <input name="title" id="title" value='<?= $row["title"] ?>'>
@@ -40,9 +41,27 @@
             <textarea name="message" id="message"><?= $row['message'] ?></textarea>
           </p>
           <p>
-            <input type="hidden" name="id" value='<?= $row["postid"] ?>'>
+            <input type="hidden" name="id" value='<?= $id ?>'>
             <input type="submit" name="command" value="Update">
             <input type="submit" name="command" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')">
+          </p>
+        </fieldset>
+      </form>
+
+
+      <form action="process.php" method="post">
+        <fieldset>
+          <legend>Delete Post Category</legend>
+          <select name='Categories' type='text'>
+			<option disabled selected value> -- select an option -- </option>
+			<?php while ($row = $statement->fetch()): ?>
+				<option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
+			<?php endwhile ?>
+		  </select>
+
+          <p>
+            <input type="hidden" name="id" value='<?= $id ?>'>
+            <input type="submit" name="command" value="DeleteCategory" onclick="return confirm('Are you sure you wish to delete this post?')">
           </p>
         </fieldset>
       </form>

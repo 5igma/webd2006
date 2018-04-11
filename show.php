@@ -20,6 +20,14 @@
 
 	showPost($id);
 	include_once('pages/loadpost.php');
+
+	if ($isLogin){
+		loadCategories();
+		include_once('pages/loadcategories.php');
+
+		showComment($id);
+		include_once('pages/loadcomments.php');
+	}
 ?>
 
 

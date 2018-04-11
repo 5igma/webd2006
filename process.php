@@ -5,7 +5,6 @@
 	$postSubmited = isset($_POST['command']);
 
 	if($postSubmited){
-
 		if($_POST['command'] == 'register'){
 
 			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -74,7 +73,7 @@
 		} elseif ($_POST['command'] == 'captcha') {
 			if($_POST["captcha"]!="" && $_SESSION["code"]==$_POST["captcha"]){
 				$_SESSION["varify"] = true;
-				header('Location: index.php?msg=varifyComplete');
+				header('Location: login.php');
 			}
 			else
 			{
@@ -117,11 +116,65 @@
 			$statement->bindValue(':postid', $postid, PDO::PARAM_INT);
 			$statement->execute();
 			header('Location: index.php');
+		} elseif ($_POST['command'] == 'setCategory'){
+			$postid		= filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+			$categoryid	= filter_input(INPUT_POST, 'Categories', FILTER_SANITIZE_NUMBER_INT);
+
+			$query = "SELECT categoryid, postid FROM postscategories WHERE categoryid = '".$categoryid."' AND postid = '".$postid."' LIMIT 1";
+			$statement = $db->prepare($query);
+			$statement->execute();
+
+			if($statement->rowCount() == 0){
+
+				$query = "INSERT INTO postscategories (categoryid, postid) values ('".$categoryid."', '".$postid."')";
+				$statement = $db->prepare($query);
+				$statement->execute();
+				header('Location: show.php?id='.$postid);
+			} else {
+				echo 'Already exist';
+			}
+
+
+		} elseif ($_POST['command'] == 'DeleteCategory'){
+			$postid		= filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+			$categoryid	= filter_input(INPUT_POST, 'Categories', FILTER_SANITIZE_NUMBER_INT);
+			
+
+			$query = "DELETE FROM postscategories WHERE categoryid = '".$categoryid."' AND postid = '".$postid."'";
+			$statement = $db->prepare($query);
+			$statement->execute();
+			header('Location: show.php?id='.$postid);
+			
+
+		} elseif ($_POST['command'] == 'addComment') {
+			$postid		= filter_input(INPUT_POST, 'postid', FILTER_SANITIZE_NUMBER_INT);
+			$userid		= filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_NUMBER_INT);
+			$message	= filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+			$message = trim($message);
+			if(strlen($message) >= 1){
+				$query = "INSERT INTO comments (postid, userid, message) values ('".$postid."','".$userid."', '".$message."')";
+				$statement = $db->prepare($query);
+				$statement->execute();
+				header('Location: show.php?id='.$postid);
+
+			}			
+		} elseif ($_POST['command'] == 'deleteComment') {
+			$commentid	= filter_input(INPUT_POST, 'commentid', FILTER_SANITIZE_NUMBER_INT);
+			$postid	= filter_input(INPUT_POST, 'postid', FILTER_SANITIZE_NUMBER_INT);
+
+			$query = "DELETE FROM comments WHERE commentid = :commentid";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':commentid', $commentid, PDO::PARAM_INT);
+			$statement->execute();
+			header('Location: show.php?id='.$postid);
 		}
+		
 
 
 	} else {
-		header('Location: index.php');
+		//header('Location: index.php');
+		echo 'error';
 	}
 
 ?>

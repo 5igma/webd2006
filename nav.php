@@ -5,6 +5,7 @@
         <?php if ($isLogin): ?>
             <li><a href="search.php">Search</a></li>
             <li><a href="allpost.php">All Posts</a></li>
+            <li><a href="categories.php">Categories</a></li>
             <li><a href="profile.php">My Profile</a></li>
         	<li><a href="logout.php">Logout</a></li>
             <?php if ($_SESSION['permission'] > 1): ?>
@@ -18,12 +19,23 @@
     </ul>
 </nav>
 <br>
-<fieldset>
-    <legend>Search</legend>
-    <form action="search.php" method="GET">
-        <input type="text" name="s" />
-        <input type="submit" value="Search" />
-    </form>
-</fieldset>
-<br>
+<?php if ($isLogin): ?>
+    <fieldset>
+        <legend>Search</legend>
+        <form action="search.php" method="GET">
+            <input type="text" name="s" />
 
+        <?php loadCategories(); ?>
+        <select name='categories'>
+            <option disabled selected value> -- all categories -- </option>
+        <?php while ($row = $statement->fetch()): ?>
+            <option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
+        <?php endwhile ?>
+
+        </select>
+
+            <input type="submit" value="Search" />
+        </form>
+    </fieldset>
+    <br>
+<?php endif; ?>

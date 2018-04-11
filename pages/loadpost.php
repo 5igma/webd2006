@@ -6,6 +6,7 @@
 
 			<div class="post">
 				<h2><a href="show.php?id=<?= $row['postid'] ?>"><?= $row['title'] ?></a></h2>
+				<h3>Categories: <?php showCategories($row['postid']) ?></h3>
 				<p>
 				<small>
 					<?= date('F d, Y, H:i a', strtotime($row['date'])) ?> -
