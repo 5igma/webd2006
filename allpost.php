@@ -7,6 +7,8 @@ if(isset($_GET['sType'])) {
 
 	$pageTitle="All Post";
 
+	include_once('header.php');
+
 	if (isset($sType)) {
 		if ($sType == 'TA') {
 			loadPostAsc();
@@ -25,10 +27,6 @@ if(isset($_GET['sType'])) {
 		load10Post();
 		$sortType='last 10 Post';
 	}
-
-	
-
-	include_once('header.php');
 
 ?>
 
