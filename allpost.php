@@ -27,7 +27,6 @@ if(isset($_GET['sType'])) {
 		load10Post();
 		$sortType='last 10 Post';
 	}
-
 ?>
 
 <nav class="nav1">
@@ -41,11 +40,7 @@ if(isset($_GET['sType'])) {
 
 <h3>Current Sort type is <?= $sortType ?></h3>
 
-<?php
-	include_once('pages/loadpost.php');
-?>
-
-
+<?php include_once('pages/loadpost.php'); ?>
 
 <?php
 	include_once('footer.php');
