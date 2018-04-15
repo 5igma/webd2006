@@ -24,14 +24,14 @@
         <form action="search.php" method="GET">
             <input type="text" name="s" />
 
-        <?php loadCategories(); ?>
-        <select name='categories'>
-            <option disabled selected value> -- all categories -- </option>
-        <?php while ($row = $statement->fetch()): ?>
-            <option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
-        <?php endwhile ?>
+            <?php loadCategories(); ?>
+            <select name='categories'>
+                <option disabled selected value> -- all categories -- </option>
+            <?php while ($row = $statement->fetch()): ?>
+                <option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
+            <?php endwhile ?>
 
-        </select>
+            </select>
 
             <input type="submit" value="Search" />
         </form>
