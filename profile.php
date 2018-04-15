@@ -27,8 +27,8 @@
 		<label for="fname">First Name:</label>
 		<input id="fname" name="fname" type="text" placeholder="<?= $row['fname'] ?>" disabled/>
 		<br>
-		<label for="fname">Last Name:</label>
-		<input id="fname" name="fname" type="text" placeholder="<?= $row['lname'] ?>" disabled/>
+		<label for="lname">Last Name:</label>
+		<input id="lname" name="lname" type="text" placeholder="<?= $row['lname'] ?>" disabled/>
 		<br>
 		<label for="email">Email:</label>
 		<input id="email" name="email" type="text" placeholder="<?= $row['email'] ?>" disabled/>

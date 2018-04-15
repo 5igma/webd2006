@@ -21,7 +21,7 @@
 
 <h2>List of Users: </h2>
 <form action="process.php" method="post">
-	<select name='users' type='text'>
+	<select name='users'>
 			<option disabled selected value> -- select an option -- </option>
 		<?php while ($row = $statement->fetch()): ?>
 			<option value="<?= $row['userid'] ?>"><?= $row['uname'] ?></option>
