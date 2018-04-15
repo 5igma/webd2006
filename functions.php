@@ -99,9 +99,10 @@
 	{
 		global $db;
 		global $statement;
-		$query = "SELECT * FROM posts p JOIN postscategories c ON p.postid = c.postid WHERE c.categoryid = '".$categoryid."'";
+		$query = "SELECT * FROM posts p JOIN postscategories c ON p.postid = c.postid WHERE c.categoryid = :categoryid";
 		$statement = $db->prepare($query); 
-		$statement->execute();
+		$bind_values = ['categoryid' => $categoryid];
+		$statement->execute($bind_values);
 		if($statement->rowCount() <= 0) {
 			header("Location: index.php");
 		die();
@@ -149,12 +150,14 @@
 
 			$string = htmlspecialchars($string); 
 			//$string = mysql_real_escape_string($string);
+			$string = '%'.$string.'%';
 
 			global $db;
 			global $statement;
-			$query = "SELECT * FROM `posts` WHERE `title` LIKE '%".$string."%' OR `message` LIKE '%".$string."%'";
+			$query = "SELECT * FROM `posts` WHERE `title` LIKE :string OR `message` LIKE :string";
 			$statement = $db->prepare($query);
-			$statement->execute();
+			$bind_values = ['string' => $string];
+			$statement->execute($bind_values);
 
 			if($statement->rowCount() > 0){
 
@@ -175,12 +178,14 @@
 
 			$string = htmlspecialchars($string); 
 			//$string = mysql_real_escape_string($string);
+			$string = '%'.$string.'%';
 
 			global $db;
 			global $statement;
-			$query = "SELECT * FROM posts p JOIN postscategories c ON p.postid = c.postid WHERE (`title` LIKE '%".$string."%' OR `message` LIKE '%".$string."%') AND c.categoryid = '".$categoryid."'";
+			$query = "SELECT * FROM posts p JOIN postscategories c ON p.postid = c.postid WHERE (`title` LIKE :string OR `message` LIKE :string) AND c.categoryid = :categoryid";
 			$statement = $db->prepare($query);
-			$statement->execute();
+			$bind_values = ['string' => $string, 'categoryid' => $categoryid];
+			$statement->execute($bind_values);
 
 			if($statement->rowCount() > 0){
 
