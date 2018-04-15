@@ -3,7 +3,6 @@
         <li><a href="index.php">Home</a></li>
         <li><a href="post.php">Post</a></li>
         <?php if ($isLogin): ?>
-            <li><a href="search.php">Search</a></li>
             <li><a href="allpost.php">All Posts</a></li>
             <li><a href="categories.php">Categories</a></li>
             <li><a href="profile.php">My Profile</a></li>
