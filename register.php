@@ -6,6 +6,10 @@
 	if(!$_SESSION['varify']){
 		header('Location: varify.php');
 	}
+
+	if (isset($_SESSION['userid'])){
+		header("Location: index.php");
+	}
 ?>
 <br>
 <form id="register" method="post" action="process.php" enctype="multipart/form-data">
