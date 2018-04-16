@@ -1,7 +1,7 @@
 
 <h2>Apply a category to a post: </h2>
 <form action="process.php" method="post">
-	<select name='Categories' type='text'>
+	<select name='Categories'>
 			<option disabled selected value> -- select an option -- </option>
 		<?php while ($row = $statement->fetch()): ?>
 			<option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
