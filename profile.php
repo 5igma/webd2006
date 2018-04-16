@@ -21,18 +21,28 @@
 <div id="profile">
 	<h2>Welcome to your Profile <?= $row['fname'] ?> <?= $row['lname'] ?>!</h2>
 	<fieldset>
-		<label for="username">Username:</label>
-		<input id="username" name="username" type="text" placeholder="<?= $row['uname'] ?>" disabled/>
+		<?php if (isset($row['active'])): ?>
+			<?php if ($row['active']): ?>
+				<img src="./uploads/<?= $row['imagename'] ?>" alt="profileImage">
+				<br>
+				<form action="process.php" method="post">
+					<input type="hidden" name="imagename" value='<?= $row['imagename'] ?>'>
+					<input type="hidden" name="userid" value='<?= $row['userid'] ?>'>
+					<input type="submit" name="command" value="Delete Image">
+				</form>
+			<?php endif ?>
+		<?php else: ?>
+			<?php include_once('upload.php'); ?>
+		<?php endif ?>
+		
+		<label>Username: <?= $row['uname'] ?></label>
 		<br>
-		<label for="fname">First Name:</label>
-		<input id="fname" name="fname" type="text" placeholder="<?= $row['fname'] ?>" disabled/>
+		<label>First Name: <?= $row['fname'] ?></label>
 		<br>
-		<label for="lname">Last Name:</label>
-		<input id="lname" name="lname" type="text" placeholder="<?= $row['lname'] ?>" disabled/>
+		<label>Last Name: <?= $row['lname'] ?></label>
 		<br>
-		<label for="email">Email:</label>
-		<input id="email" name="email" type="text" placeholder="<?= $row['email'] ?>" disabled/>
-		<br>
+		<label>Email: <?= $row['email'] ?></label>
+		<br>	
 	</fieldset>
 </div>
 
