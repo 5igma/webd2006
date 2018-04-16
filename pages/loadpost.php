@@ -4,7 +4,7 @@
 	<?php else: ?>
 		<?php while ($row = $statement->fetch()): ?>
 
-			<div class="post">
+			<div>
 				<h2><a href="show.php?id=<?= $row['postid'] ?>"><?= $row['title'] ?></a></h2>
 				<h3>Categories: <?php showCategories($row['postid']) ?></h3>
 				<p>

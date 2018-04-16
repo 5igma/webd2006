@@ -1,4 +1,4 @@
-<div id="posts">
+<div id="comments">
 	<?php if ($isLogin): ?>
 		<form action="process.php" method="post">
 			<fieldset>

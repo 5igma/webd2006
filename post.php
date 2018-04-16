@@ -15,7 +15,7 @@
 
 ?>
 <br>
-<div id="posts">
+<div>
   <form action="process.php" method="post">
     <fieldset>
       <legend>New Post</legend>
