@@ -52,7 +52,7 @@
       <form action="process.php" method="post">
         <fieldset>
           <legend>Delete Post Category</legend>
-          <select name='Categories' type='text'>
+          <select name='Categories'>
 			<option disabled selected value> -- select an option -- </option>
 			<?php while ($row = $statement->fetch()): ?>
 				<option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
