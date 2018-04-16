@@ -74,11 +74,41 @@
         $temporary_image_path  = $_FILES['image']['tmp_name'];
         $new_image_path        = file_upload_path($image_filename);
         $actual_file_extension   = pathinfo($new_image_path, PATHINFO_EXTENSION);
+        
+
+
         if (file_is_an_image($temporary_image_path, $new_image_path)) {
+        	$imagename = $_SESSION["uname"].'.'.$actual_file_extension;
+        	$userid = $_SESSION["userid"];
+            $active = true;
+
             move_uploaded_file($temporary_image_path, $new_image_path);
             $img = resize_image($new_image_path, 200, 200);
             imagejpeg($img, $new_image_path);
-            rename($new_image_path, './uploads/'.$_SESSION["uname"].'.'.$actual_file_extension);
+            rename($new_image_path, './uploads/'.$imagename);
+            
+
+			$query = "SELECT userid FROM profileimage WHERE userid = :userid LIMIT 1";
+			$statement = $db->prepare($query);
+			$bind_values = ['userid' => $userid];
+			$statement->execute($bind_values);
+
+			if($statement->rowCount() == 0){
+				$query = "INSERT INTO profileimage (userid, imagename, active) VALUES (:userid, :imagename, :active)";
+	            $statement = $db->prepare($query);
+	            $bind_values = ['userid' => $userid, 'imagename' => $imagename, 'active' => $active];
+	            $statement->execute($bind_values);
+	            header('location:profile.php');
+			} else {
+				$query = "UPDATE profileimage SET imagename = :imagename, active = :active WHERE userid = :userid";
+	            $statement = $db->prepare($query);
+	            $bind_values = ['userid' => $userid, 'imagename' => $imagename, 'active' => $active];
+	            $statement->execute($bind_values);
+	            header('location:profile.php');
+			}
+
+
+            
         }
     }
 ?>
@@ -95,9 +125,4 @@
 
     <?php elseif ($image_upload_detected): ?>
 
-    	<p>File Upload Complete!</p>
-
     <?php endif ?>
-
-
-<?php include_once('footer.php'); ?>
