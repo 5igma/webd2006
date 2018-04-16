@@ -53,7 +53,7 @@
 				$uname = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 				$password = $_POST['password'];
 				$ip = $_SERVER['REMOTE_ADDR'];
-				$query = "SELECT * FROM Users WHERE uname = :uname";
+				$query = "SELECT * FROM users WHERE uname = :uname";
 				$statement = $db->prepare($query);
 				$statement -> bindValue(":uname", $uname);
 				$statement->execute();

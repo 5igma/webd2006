@@ -30,7 +30,7 @@
 	{
 		global $db;
 		global $statement;
-		$query = "SELECT * FROM Users;";
+		$query = "SELECT * FROM users;";
 		$statement = $db->prepare($query);
 		$statement->execute();
 	}
