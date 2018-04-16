@@ -14,7 +14,6 @@
         	<li><a href="register.php">Register</a></li>
         	<li><a href="login.php">Login</a></li>
         <?php endif; ?>
-        <li><a href="contact.php">Contact us</a></li>
     </ul>
 </nav>
 <br>
