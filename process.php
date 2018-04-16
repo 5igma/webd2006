@@ -188,12 +188,21 @@
 			$statement->execute();
 			unlink("./uploads/".$imagename);
 			header('Location: profile.php');
+		} elseif ($_POST['command'] == 'deleteUser') {
+			$userid	= filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_NUMBER_INT);
+
+			$userid = trim($userid);
+			$query = "DELETE FROM users WHERE userid = :userid";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':userid', $userid, PDO::PARAM_INT);
+			$statement->execute();
+			header('Location: admin.php');
 		}
 		
 
 
 	} else {
-		//header('Location: index.php');
+		header('Location: index.php');
 		echo 'error';
 	}
 
