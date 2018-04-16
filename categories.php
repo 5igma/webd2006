@@ -32,7 +32,7 @@
 
 <h2>Selecting a Category: </h2>
 <form action="categories.php" method="POST">
-	<select name='categories' type='text'>
+	<select name='categories'>
 			<option disabled selected value> -- select an option -- </option>
 		<?php while ($row = $statement->fetch()): ?>
 			<option value="<?= $row['categoryid'] ?>"><?= $row['name'] ?></option>
