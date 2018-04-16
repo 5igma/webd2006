@@ -201,13 +201,32 @@
 	function loadProfile($userid){
 		global $db;
 		global $statement;
-		$query = "SELECT * FROM users WHERE userid = :userid;";
-		$statement = $db->prepare($query); 
+
+		$query = "SELECT userid FROM profileimage WHERE userid = :userid LIMIT 1";
+		$statement = $db->prepare($query);
 		$bind_values = ['userid' => $userid];
 		$statement->execute($bind_values);
-		if($statement->rowCount() <= 0) {
-			header("Location: index.php?msg=invalidUser");
-		die();
+
+		if($statement->rowCount() > 0){ 
+
+			$query = "SELECT * FROM users u JOIN profileimage p ON u.userid = p.userid WHERE u.userid = :userid;";
+			$statement = $db->prepare($query); 
+			$bind_values = ['userid' => $userid];
+			$statement->execute($bind_values);
+			if($statement->rowCount() <= 0) {
+				header("Location: index.php?msg=invalidUser");
+				die();
+			} 
+
+		} else {
+			$query = "SELECT * FROM users WHERE userid = :userid;";
+			$statement = $db->prepare($query); 
+			$bind_values = ['userid' => $userid];
+			$statement->execute($bind_values);
+			if($statement->rowCount() <= 0) {
+				header("Location: index.php?msg=invalidUser");
+				die();
+			} 
 		}
 	}
 
