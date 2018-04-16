@@ -178,6 +178,16 @@
 			$statement->bindValue(':commentid', $commentid, PDO::PARAM_INT);
 			$statement->execute();
 			header('Location: show.php?id='.$postid);
+		} elseif ($_POST['command'] == 'Delete Image') {
+			$userid	= filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_NUMBER_INT);
+			$imagename	= filter_input(INPUT_POST, 'imagename', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+			$query = "DELETE FROM profileimage WHERE userid = :userid";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':userid', $userid, PDO::PARAM_INT);
+			$statement->execute();
+			unlink("./uploads/".$imagename);
+			header('Location: profile.php');
 		}
 		
 
